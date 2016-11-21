@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<style type="text/css">
+			.starts span i {
+				list-style: none;
+				width: 20px;
+				height: 31px;
+				float: left;
+				color: gainsboro;
+				cursor: pointer;
+				font-size: 20px;
+			}
+			
+			.starts span i.starActive {
+				color: red;
+			}
+			
+			.starts span span {
+				display: inline;
+				float: left;
+				padding-left: 10px;
+				height: 31px;
+				line-height: 31px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="starts">
+			<span id="pingStar">
+			    <i rel="1" title="特别差，给1分" class="iconfont">&#xe617;</i>
+			    <i rel="2" title="很差，给2分" class="iconfont">&#xe617;</i>
+			    <i rel="3" title="一般般，给3分" class="iconfont">&#xe617;</i>
+			    <i rel="4" title="很好，给4分" class="iconfont">&#xe617;</i>
+			    <i rel="5" title="非常好，给5分" class="iconfont">&#xe617;</i>
+			    <span  id="starDescribe"></span>
+			</span>
+			<input type="hidden" value="" id="startP">
+		</div>
+		<script type="text/javascript">
+			function fiveStarAppraise(){
+				var pingStar = document.getElementById("pingStar"),
+					starDescribe = document.getElementById('starDescribe'),
+					starList = pingStar.getElementsByTagName("i"),
+					input = document.getElementById('startP'); //保存所选值
+				clearAll = function() {
+					for(var i = 0; i < starList.length; i++) {
+						starList[i].className = 'iconfont';
+					}
+				}
+				for(var i = 0; i < starList.length; i++) {
+					starList[i].onclick = function() {
+						var q = this.getAttribute("rel");
+						clearAll();
+						input.value = q;
+						for(var i = 0; i < q; i++) {
+							starList[i].className = 'starActive iconfont';
+						}
+						starDescribe.innerHTML = this.getAttribute("title");
+					}
+					starList[i].onmouseover = function() {
+						var q = this.getAttribute("rel");
+						clearAll();
+						for(var i = 0; i < q; i++) {
+							starList[i].className = 'starActive iconfont';
+						}
+					}
+					starList[i].onmouseout = function() {
+						clearAll();
+						for(var i = 0; i < input.value; i++) {
+							starList[i].className = 'starActive iconfont';
+						}
+					}
+				}
+			}
+			fiveStarAppraise();
+		</script>
+	</body>
+
+</html>
